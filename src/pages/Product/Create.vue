@@ -9,7 +9,6 @@
           @submit="onSubmit"
           v-slot="{ meta, isSubmitting }"
           :validation-schema="schema"
-          :initial-values="formValues"
         >
           <div class="form-control">
             <LabelInput label="Product Name" for="name" />
@@ -37,7 +36,7 @@
 
           <div class="form-control mt-6">
             <button class="btn btn-primary" :disabled="isSubmitting">
-              <span v-if="!isSubmitting"> Login </span>
+              <span v-if="!isSubmitting"> Submit </span>
 
               <font-awesome-icon
                 v-else="isSubmitting"

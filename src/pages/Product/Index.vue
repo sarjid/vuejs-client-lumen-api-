@@ -1,49 +1,29 @@
 <template>
-  <div class="bg-white">
-    <div
-      class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
-    >
-      <h2
-        class="text-2xl font-bold tracking-tight text-gray-900 text-center mb-2"
-      >
-        Product Lists
-      </h2>
-      <div class="grid grid-cols-6 sm:grid-cols-3 md:grid-cols-5 gap-4">
-        <div
-          v-for="product in getProducts"
-          :key="product.id"
-          class="max-w-md mx-auto bg-white rounded-lg shadow-lg"
-        >
-          <div class="px-4 py-4">
-            <h2 class="text-xl font-semibold text-gray-800">
-              {{ product.product_name }}
-            </h2>
+  <body
+    class="flex flex-col w-screen min-h-screen p-20 bg-gray-100 text-gray-800"
+  >
+    <!-- Component Start -->
+    <h1 class="text-xl text-center">Product List</h1>
 
-            <p class="text-green-600 font-bold mt-2">{{ product.price }}$</p>
-            <p class="text-gray-500 text-sm">
-              {{ product.product_code }}
-            </p>
-            <div class="flex justify-between items-center mt-4">
-              <!-- Delete Icon -->
-              <button
-                class="text-red-500 hover:text-red-700"
-                title="Delete Product"
-                @click="destroy(product.id)"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div
+      class="grid 2xl:grid-cols-5 xl:grid-cols-5 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-4 gap-y-6 w-full mt-6"
+    >
+      <!-- Product Tile Start -->
+      <ProductItem
+        v-for="(product, index) in getProducts"
+        :key="index"
+        :product="product"
+        @destroy="destroy"
+      />
     </div>
-  </div>
+  </body>
 </template>
 
 <script setup>
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useProductStore } from "@/stores/product";
+import ProductItem from "@/components/ProductItem.vue";
 const product = useProductStore();
 const { getProducts } = storeToRefs(product);
 

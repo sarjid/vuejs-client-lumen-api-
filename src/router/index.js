@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Index from "@/pages/Index.vue";
-import { Login } from "@/pages/Auth";
+import { Login, Register } from "@/pages/Auth";
 import Dashboard from "@/pages/User/Dashboard.vue";
 import { ProductCreate, ProductIndex } from "@/pages/Product";
 import { useAuthStore } from "@/stores/auth";
@@ -12,6 +12,13 @@ const routes = [
     path: "/auth/login",
     component: Login,
     name: "user.login",
+    meta: { guest: true },
+  },
+
+  {
+    path: "/auth/register",
+    component: Register,
+    name: "user.register",
     meta: { guest: true },
   },
 

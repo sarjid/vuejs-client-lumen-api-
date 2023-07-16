@@ -29,8 +29,25 @@ export const useAuthStore = defineStore("auth", {
       try {
         const res = await axiosInstance.post("/login", values);
         if (res.status == 200) {
-          this.user = res.data?.user;
-          this.isLoggedIn = true;
+          this.manageAuth(res);
+          return new Promise((resolve) => {
+            resolve(res.data);
+          });
+        }
+      } catch (error) {
+        if (error.response) {
+          return new Promise((reject) => {
+            reject(error.response.data.errors);
+          });
+        }
+      }
+    },
+
+    async register(values) {
+      try {
+        const res = await axiosInstance.post("/register", values);
+        if (res.status == 200) {
+          this.manageAuth(res);
           return new Promise((resolve) => {
             resolve(res.data);
           });
@@ -47,13 +64,17 @@ export const useAuthStore = defineStore("auth", {
     async logout() {
       try {
         const res = await axiosInstance.post("/logout");
-
         if (res.status == 200) {
           this.isLoggedIn = false;
           this.$reset();
           router.push({ name: "user.login" });
         }
       } catch (error) {}
+    },
+
+    manageAuth(res) {
+      this.user = res.data?.user;
+      this.isLoggedIn = true;
     },
   },
 });

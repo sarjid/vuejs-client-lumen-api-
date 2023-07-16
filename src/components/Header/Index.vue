@@ -28,11 +28,11 @@ const userLogout = () => {
                 class="btn btn-primary btn-sm"
                 >Login</RouterLink
               >
-              <!-- <RouterLink
+              <RouterLink
                 :to="{ name: 'user.register' }"
                 class="btn btn-primary btn-sm"
                 >Register</RouterLink
-              > -->
+              >
             </ul>
           </template>
 

@@ -1,48 +1,41 @@
 <template>
-  <div>
-    <div class="hero min-h-screen bg-base-200">
-      <div class="hero-content">
-        <div class="card w-full max-w-md shadow-2xl bg-base-100">
-          <div class="card-body">
-            <Form
-              @submit="onSubmit"
-              v-slot="{ meta, isSubmitting }"
-              :validation-schema="schema"
-              :initial-values="formValues"
-            >
-              <div class="form-control">
-                <LabelInput label="Email" for="email" />
-                <TextInput
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="email"
-                />
-              </div>
-
-              <div class="form-control">
-                <LabelInput label="Password" />
-                <TextInput
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                />
-              </div>
-
-              <div class="form-control mt-6">
-                <button class="btn btn-primary" :disabled="isSubmitting">
-                  <span v-if="!isSubmitting"> Login </span>
-
-                  <font-awesome-icon
-                    v-else="isSubmitting"
-                    :icon="['fas', 'spinner']"
-                    size="2xl"
-                  />
-                </button>
-              </div>
-            </Form>
+  <div class="min-h-screen flex items-center">
+    <div class="w-full">
+      <div
+        class="card bg-white p-10 rounded-lg shadow-xl md:w-3/4 mx-auto lg:w-1/3"
+      >
+        <Form
+          @submit="onSubmit"
+          v-slot="{ meta, isSubmitting }"
+          :validation-schema="schema"
+        >
+          <div class="form-control">
+            <LabelInput label="Email" for="email" />
+            <TextInput
+              id="email"
+              name="email"
+              type="email"
+              placeholder="email"
+            />
           </div>
-        </div>
+
+          <div class="form-control">
+            <LabelInput label="Password" />
+            <TextInput type="password" name="password" placeholder="Password" />
+          </div>
+
+          <div class="form-control mt-6">
+            <button class="btn btn-primary" :disabled="isSubmitting">
+              <span v-if="!isSubmitting"> Login </span>
+
+              <font-awesome-icon
+                v-else="isSubmitting"
+                :icon="['fas', 'spinner']"
+                size="2xl"
+              />
+            </button>
+          </div>
+        </Form>
       </div>
     </div>
   </div>

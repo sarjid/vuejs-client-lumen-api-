@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 import axiosInstance from "@/services/axiosService";
-import router from "../router";
+
 export const useProductStore = defineStore("product", {
   state: () => ({
     products: [],
+    editProduct: {},
     loading: false,
   }),
 
@@ -44,6 +45,19 @@ export const useProductStore = defineStore("product", {
           return new Promise((reject) => {
             reject(error.response.data.errors);
           });
+        }
+      }
+    },
+
+    async productById(id) {
+      try {
+        const res = await axiosInstance.get(`/product/${id}/edit`);
+        if (res.status == 200) {
+          this.editProduct = res.data.data;
+        }
+      } catch (error) {
+        if (error.response) {
+          alert(error.response.data.errors);
         }
       }
     },
